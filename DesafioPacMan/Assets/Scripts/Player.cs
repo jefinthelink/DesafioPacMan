@@ -9,7 +9,9 @@ public class Player : People
     [SerializeField] float xpCountOfLevels = 15.0f;
     [SerializeField] private TMP_Text textLevel;
     [SerializeField] private TMP_Text textPoints;
+    public Events events;
     public GameObject GameOverPanel, WinPanel;
+
 
 
   

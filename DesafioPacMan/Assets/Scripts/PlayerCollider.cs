@@ -42,6 +42,13 @@ public class PlayerCollider : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        if (collision.gameObject.CompareTag("StartEvent"))
+        {
+            player.events.StartEvent();
+            Destroy(collision.gameObject);
+
+        }
+
         
        
     }
