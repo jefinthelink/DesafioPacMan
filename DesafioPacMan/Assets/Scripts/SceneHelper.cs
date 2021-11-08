@@ -24,4 +24,9 @@ public class SceneHelper : MonoBehaviour
     {
         PlayerPrefs.SetInt("PointsRecord", 0);
     }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }

@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using UnityEngine.Audio;
 using UnityEngine;
 
 public class PlayerCollider : MonoBehaviour
 {
      private Player player;
+    private AudioSource source;
     
 
     private void Start()
@@ -13,7 +14,7 @@ public class PlayerCollider : MonoBehaviour
     private void GetValues()
     {
         player = transform.GetComponent<Player>();
-        
+        source = transform.GetComponent<AudioSource>();
     }
     
      void OnCollisionEnter2D(Collision2D collision)
@@ -37,8 +38,10 @@ public class PlayerCollider : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Xp"))
         {
-            player.GetXp(collision.gameObject.GetComponent<Xp>().xpValue);
-            //tocar som
+            Xp xp = collision.gameObject.GetComponent<Xp>();
+            player.GetXp(xp.xpValue);
+            player.points += xp.pointValue; 
+            source.Play();
             Destroy(collision.gameObject);
         }
 
