@@ -2,28 +2,48 @@
 
 public class Enemy : People
 {
-    public int number;
+    public CreateEnemy creat;
+    [HideInInspector]public int number;
     [HideInInspector] public People p;
-    public float xpValue = 10.0f;
-    public int pointsValue = 2;
-    [SerializeField] private float speed = 4.0f;
+    [HideInInspector] public float xpValue = 10.0f;
+    [HideInInspector] public int pointsValue = 2;
+    private float speed = 4.0f;
+    [HideInInspector] public bool pause = false;
+    private Sprite sprite;
+    private SpriteRenderer spriteRenderer;
 
    
     public Action currentAction;
 
-    public Transform target;
+    [HideInInspector] public Transform target;
     private Transform wayPoint0;
-    public Transform lasttarget;
-    public Transform player;
+    [HideInInspector] public Transform lasttarget;
+    [HideInInspector] public Transform player;
 
 
     private void Start()
     {
+        setValues();
+
+    }
+
+    private void setValues()
+    {
         p = new People();
-       // currentAction = action.walk;
+        currentAction = Action.walk;
         wayPoint0 = GameObject.FindGameObjectWithTag("WayPoint0").transform;
         target = wayPoint0;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        sprite = creat.art;
+        number = creat.number;
+        xpValue = creat.xpValue;
+        pointsValue = creat.pointsValue;
+        speed = creat.speed;
+
+
+        spriteRenderer = transform.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = sprite;
 
     }
 
@@ -87,7 +107,10 @@ public class Enemy : People
 
     private void Move(Vector3 inicialPosition, Vector3 target)
     {
+        if (!pause)
+        {
         transform.position = Vector3.MoveTowards(inicialPosition, target, speed * Time.deltaTime);    
+        }
     }
 
 }

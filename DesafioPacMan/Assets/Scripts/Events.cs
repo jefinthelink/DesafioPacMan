@@ -5,22 +5,26 @@ using UnityEngine;
 public class Events : MonoBehaviour
 {
     [SerializeField] private GameObject PanelEvents;
-    [SerializeField] float timeDoublePoints = 15.0f;
-    [SerializeField] float timeEnemyFollowPlayer = 10.0f;
-    [SerializeField] string[] bills;
-    [SerializeField] int[] answers;
-    [SerializeField] Button[] answersbtn;
+    [SerializeField] private float timeDoublePoints = 15.0f;
+    [SerializeField] private float timeEnemyFollowPlayer = 10.0f;
+    [SerializeField] private string[] bills;
+    [SerializeField] private int[] answers;
+    [SerializeField] private Button[] answersbtn;
     [SerializeField] private TMP_Text textAnswer;
+    [SerializeField] private TMP_Text textTimeToAnswer;
+    [SerializeField] private float timetoAnswer = 5.0f;
 
+    private float timetoAnswerAux;
+    private bool startEvent = false;
     private Button btnWithTrueAnswer;
     private int indexOfbtnWithTrueAnswer;
     private int indexOfBills;
     private string currentBills;
     private float timeDoublePointsAux;
     private float timeEnemyFollowPlayerAux;
-    private GameObject[] enemysInAceneObj;
-    private Enemy[] enemysInAcene = new Enemy[1];
-    private bool startDoublePoints = false , startFollowPlayer = false;
+    public GameObject[] enemysInAceneObj;
+    public Enemy[] enemysInAcene ;
+    public bool startDoublePoints = false , startFollowPlayer = false;
 
     private void Start()
     {
@@ -30,9 +34,11 @@ public class Events : MonoBehaviour
     {
         timeDoublePointsAux = timeDoublePoints;
         timeEnemyFollowPlayerAux = timeEnemyFollowPlayer;
+        timetoAnswerAux -= timetoAnswer;
     }
     private void Update()
     {
+        Timer();
         if (startDoublePoints)
         {
             timeDoublePoints -= Time.deltaTime;
@@ -46,7 +52,7 @@ public class Events : MonoBehaviour
         if (startFollowPlayer)
         {
             timeEnemyFollowPlayer -= Time.deltaTime;
-            if (timeDoublePoints <= 0.0f)
+            if (timeEnemyFollowPlayer <= 0.0f)
             {
                 startFollowPlayer = false;
                 timeEnemyFollowPlayer = timeEnemyFollowPlayerAux;
@@ -54,23 +60,51 @@ public class Events : MonoBehaviour
             }
         }
 
+
+    }
+
+    private void Timer()
+    {
+        if (startEvent)
+        {
+        timetoAnswer -= Time.deltaTime;
+            textTimeToAnswer.text = timetoAnswer.ToString("f");
+        if (timetoAnswer <= 0.0f)
+        {
+            timetoAnswer = timetoAnswerAux;
+            startEvent = false;
+            FinishEvent(false);
+        }
+        }
     }
     public void StartEvent()
     {
-        GameManager.instance.PauseGame();
+        //GameManager.instance.PauseGame();
+        VerifyEnemys();
+        PauseEnemy(true);
         PanelEvents.SetActive(true);
         ChooseBills();
         ChooseBtn();
+        startEvent = true;
     }
+    private void PauseEnemy(bool value)
+    {
+        for (int i = 0; i < enemysInAcene.Length; i++)
+        {
+            enemysInAcene[i].pause = value;
+        }
+    }
+
     public void FinishEvent(bool win)
     {
+        PauseEnemy(false);
         PanelEvents.SetActive(false);
         if (win)
         {
             VerifyEnemys();
             ChangePoints(true);
             startDoublePoints = true;
-            GameManager.instance.UnpauseGame();
+           // GameManager.instance.UnpauseGame();
         }
         else
         {
@@ -83,7 +117,7 @@ public class Events : MonoBehaviour
     private void VerifyEnemys()
     {
         enemysInAceneObj = GameObject.FindGameObjectsWithTag("Enemy");
-        
+        enemysInAcene = new Enemy[enemysInAceneObj.Length];
         for(int i = 0; i < enemysInAceneObj.Length; i++ )
         {
             enemysInAcene[i] = enemysInAceneObj[i].GetComponent<Enemy>();
