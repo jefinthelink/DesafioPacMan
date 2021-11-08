@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PlayerCollider : MonoBehaviour
 {
-    [SerializeField] private Player player;
-    [HideInInspector] public People p;
+     private Player player;
+    
 
     private void Start()
     {
@@ -13,7 +13,7 @@ public class PlayerCollider : MonoBehaviour
     private void GetValues()
     {
         player = transform.GetComponent<Player>();
-        p = new People();
+        
     }
     
      void OnCollisionEnter2D(Collision2D collision)
@@ -25,14 +25,14 @@ public class PlayerCollider : MonoBehaviour
             {
                 player.GameOverPanel.SetActive(true);
                 player.GameOverPanel.GetComponent<GameOver>().ShowPanel();
-                player.death();
+                Destroy(transform.gameObject);
             }
             else
             {
                 player.points += enemy.pointsValue;
                 player.GetXp(enemy.xpValue);
-                
                 Destroy(collision.gameObject);
+               
             }
         }
         if (collision.gameObject.CompareTag("Xp"))

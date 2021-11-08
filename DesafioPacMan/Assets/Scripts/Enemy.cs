@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 
-public class Enemy : People
+public class Enemy : MonoBehaviour
 {
     public CreateEnemy creat;
     [HideInInspector]public int number;
-    [HideInInspector] public People p;
     [HideInInspector] public float xpValue = 10.0f;
     [HideInInspector] public int pointsValue = 2;
     private float speed = 4.0f;
@@ -29,7 +28,7 @@ public class Enemy : People
 
     private void setValues()
     {
-        p = new People();
+        
         currentAction = Action.walk;
         wayPoint0 = GameObject.FindGameObjectWithTag("WayPoint0").transform;
         target = wayPoint0;

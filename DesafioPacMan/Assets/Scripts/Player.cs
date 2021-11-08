@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
-public class Player : People
+public class Player : MonoBehaviour
 {
 
     public int level = 0;
