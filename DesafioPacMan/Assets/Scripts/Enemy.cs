@@ -6,26 +6,26 @@ public class Enemy : MonoBehaviour
     [HideInInspector]public int number;
     [HideInInspector] public float xpValue = 10.0f;
     [HideInInspector] public int pointsValue = 2;
-    private float speed = 4.0f;
     [HideInInspector] public bool pause = false;
+    [HideInInspector] public Transform target;
+    [HideInInspector] public Transform lasttarget;
+    [HideInInspector] public Transform player;
+    
+    
+    private float speed = 4.0f;
     private Sprite sprite;
     private SpriteRenderer spriteRenderer;
+    private Transform wayPoint0;
 
    
     public Action currentAction;
 
-    [HideInInspector] public Transform target;
-    private Transform wayPoint0;
-    [HideInInspector] public Transform lasttarget;
-    [HideInInspector] public Transform player;
 
 
     private void Start()
     {
         setValues();
-
     }
-
     private void setValues()
     {
         
@@ -45,14 +45,12 @@ public class Enemy : MonoBehaviour
         spriteRenderer.sprite = sprite;
 
     }
-
     private void Update()
     {
         FreeMoving();
         FollowPlayer();
         GoHome();
     }
-
     private void FreeMoving()
     {
         if (currentAction == Action.walk)
@@ -103,7 +101,6 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
     private void Move(Vector3 inicialPosition, Vector3 target)
     {
         if (!pause)

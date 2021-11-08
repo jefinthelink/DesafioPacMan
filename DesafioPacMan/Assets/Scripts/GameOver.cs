@@ -16,17 +16,13 @@ public class GameOver : MonoBehaviour
 
     private void Start()
     {
-     
         content.SetActive(false);
-        
-  
     }
     private void SetTextValues()
     {
         textPoints.text = GameManager.instance.points.ToString();
         textPointsRecord.text = GameManager.instance.pointsRecord.ToString();
     }
-
     public void ShowPanel()
     {
         content.SetActive(true);
@@ -39,7 +35,6 @@ public class GameOver : MonoBehaviour
     {
         VerifyEnemysInScene();
     }
-
     public void VerifyEnemysInScene()
     {
         if (modes == ModesOfGameOver.win && !endGame)

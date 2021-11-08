@@ -2,8 +2,7 @@
 
 public class Spawner : MonoBehaviour
 {
-    [Header("modos do spawner")]
-  //  [SerializeField] private ModesOfSpawn modes;
+
     [Header("Spawn de inimigos")]
     [SerializeField] private GameObject[] enemys;
     [SerializeField] private int enemyCount = 4;
@@ -26,7 +25,6 @@ public class Spawner : MonoBehaviour
     {
         SetValues();
     }
-
     private void SetValues()
     {
         delaytoSpawnEventsAux = delaytoSpawnEvents;
@@ -40,19 +38,13 @@ public class Spawner : MonoBehaviour
     }
     private void SpawnEnemy()
     {
-       // if (modes == ModesOfSpawn.Enemy)
-      //  {
             for (int i = 0; i < enemyCount; i++)
             {
             Instantiate(enemys[Random.Range(0,enemys.Length)],transform.position,Quaternion.identity);
-            }
-        //}
+            } 
     }
-
     private void SpawnXp()
     {
-        //if (modes == ModesOfSpawn.Xp)
-      //  {
             delayToSpawnXp -= Time.deltaTime;
             if (delayToSpawnXp <= 0.0f)
             {
@@ -62,14 +54,10 @@ public class Spawner : MonoBehaviour
                 delayToSpawnXp = delayToSpawnXpAux;
                 currentXp = Instantiate(xp, placesToSpawnXp[Random.Range(0, placesToSpawnXp.Length)].position, Quaternion.identity);
                 }
-            }
-       // }
+            } 
     }
-
     private void SpawnEvents()
     {
-        //if (modes == ModesOfSpawn.Events)
-       // {
             delaytoSpawnEvents -= Time.deltaTime;
             if (delaytoSpawnEvents <= 0.0f)
             {
@@ -81,11 +69,7 @@ public class Spawner : MonoBehaviour
                 Debug.Log("instanciou evento");
                 }
             }
-        //}
     }
-
-
-
 }
 
 public enum ModesOfSpawn

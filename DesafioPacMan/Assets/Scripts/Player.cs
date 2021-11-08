@@ -38,13 +38,10 @@ public class Player : MonoBehaviour
             GetXp(xpValue);
         }
     }
-
     private void UpdateUi()
     {
         textLevel.text = "Level: " + level.ToString();
         textPoints.text = "Pontos: " + points.ToString();
         GameManager.instance.points = points;
     }
-
-
 }

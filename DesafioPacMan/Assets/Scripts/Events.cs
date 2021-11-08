@@ -62,7 +62,6 @@ public class Events : MonoBehaviour
 
 
     }
-
     private void Timer()
     {
         if (startEvent)
@@ -79,7 +78,7 @@ public class Events : MonoBehaviour
     }
     public void StartEvent()
     {
-        //GameManager.instance.PauseGame();
+        
         VerifyEnemys();
         PauseEnemy(true);
         PanelEvents.SetActive(true);
@@ -94,7 +93,6 @@ public class Events : MonoBehaviour
             enemysInAcene[i].pause = value;
         }
     }
-
     public void FinishEvent(bool win)
     {
         PauseEnemy(false);
@@ -104,7 +102,7 @@ public class Events : MonoBehaviour
             VerifyEnemys();
             ChangePoints(true);
             startDoublePoints = true;
-           // GameManager.instance.UnpauseGame();
+          
         }
         else
         {
@@ -147,7 +145,6 @@ public class Events : MonoBehaviour
             }
         }
     }
-
     private void ChooseBtn()
     {
         indexOfbtnWithTrueAnswer = Random.Range(0, answersbtn.Length);
@@ -164,14 +161,12 @@ public class Events : MonoBehaviour
             }
         }
     }
-
     public void ChooseBills()
     {
         indexOfBills = Random.Range(0, bills.Length);
         currentBills = bills[indexOfBills];
         textAnswer.text = currentBills;
     }
-
     public int Chooseanswers()
     {
         int index;

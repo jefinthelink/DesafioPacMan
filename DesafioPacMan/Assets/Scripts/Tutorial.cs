@@ -9,6 +9,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private TMP_Text description;
     [SerializeField] private Image art;
     [SerializeField] private GameObject content;
+    [SerializeField] GameObject logo;
 
     private int index = 0;
     private void ShowInformation(int index)
@@ -17,7 +18,6 @@ public class Tutorial : MonoBehaviour
         description.text = create[index].description;
         art.sprite = create[index].art; 
     }
-
     public void NextTutorial()
     {
             index++;
@@ -39,6 +39,7 @@ public class Tutorial : MonoBehaviour
     {
         index = 0;
         content.SetActive(false);
+        logo.SetActive(true);
     }
 
 }

@@ -16,7 +16,6 @@ public class PlayerCollider : MonoBehaviour
         player = transform.GetComponent<Player>();
         source = transform.GetComponent<AudioSource>();
     }
-    
      void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))

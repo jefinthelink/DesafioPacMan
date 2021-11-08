@@ -8,7 +8,6 @@ public class SceneHelper : MonoBehaviour
         GameManager.instance.UnpauseGame();
         SceneManager.LoadScene("Gameplay");
     }
-
     public void PlayGameplay1()
     {
         GameManager.instance.UnpauseGame();
@@ -19,12 +18,10 @@ public class SceneHelper : MonoBehaviour
         GameManager.instance.UnpauseGame();
         SceneManager.LoadScene("Menu");
     }
-
     public void ResetGame()
     {
         PlayerPrefs.SetInt("PointsRecord", 0);
     }
-
     public void Exit()
     {
         Application.Quit();
